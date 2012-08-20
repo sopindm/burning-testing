@@ -197,7 +197,7 @@
 (defcheck error (expression message)
   (with-gensyms (error-sym)
     `(condition-check ,expression (simple-error ,error-sym) 
-       (!string= (apply #'format nil
+       (?string= (apply #'format nil
 			(simple-condition-format-control ,error-sym)
 			(simple-condition-format-arguments ,error-sym))
 		 ,message))))
