@@ -194,13 +194,13 @@
        (declare (ignorable condition))
        ,@(mapcar #'check-form arg-forms))))
 
-(defcheck error (expression message)
+(defcheck error (expression message &rest args)
   (with-gensyms (error-sym)
     `(condition-check ,expression (simple-error ,error-sym) 
        (?string= (apply #'format nil
 			(simple-condition-format-control ,error-sym)
 			(simple-condition-format-arguments ,error-sym))
-		 ,message))))
+		 (format nil ,message ,@args)))))
 
 (eval-everytime
   (defun string-to-lines (string)

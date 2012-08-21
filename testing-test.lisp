@@ -270,6 +270,7 @@
 (def-testing-test error-check-test check-tests
     !lines=
   (!error (error "it's an error") "it's an error")
+  (?error (error "A error with arg ~a." 'a-symbol) "A error with arg ~a." 'a-symbol)
   (lines ""
 	 "1 tests of 1 success."))
 
