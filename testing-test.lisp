@@ -312,6 +312,21 @@
 	 "Test EVERY-TEST-FAIL.CHECK-TESTS FAILED."
 	 "0 tests of 1 success."))
 
+(def-testing-test find-test-success check-tests
+    !lines=
+  (?find 'a '(a b c))
+  (?find '(a b c) '((1 2 3) (a b c)) :test #'equal)
+  (lines "" 
+	 "1 tests of 1 success."))
+
+(def-testing-test find-test-fail check-tests
+    !lines=
+  (?find 'a '(1 2 3))
+  (lines (format nil "No element ~a in sequence ~a." ''a ''(1 2 3))
+	 "" 
+	 "Test FIND-TEST-FAIL.CHECK-TESTS FAILED."
+	 "0 tests of 1 success."))
+
 (def-testing-test mapcheck-test-success check-tests
     !lines=
   (mapcheck ?t '(1 2 3))

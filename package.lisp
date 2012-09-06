@@ -30,6 +30,7 @@
 	   #:!lines= #:?lines=
 	   #:!set= #:?set=
 	   #:!every #:?every
+	   #:!find #:?find
 
 	   #:!condition #:?condition
 	   #:!error #:?error

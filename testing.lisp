@@ -265,6 +265,10 @@
 		(check result (format nil "~a is false for ~a" ,predicate args))))
 	 (mapcar #'do-check ,every-result ,list ,@more-lists)))))
 
+(defcheck find (item sequence &key (test nil test-p))
+  `(let ((result (find ,item ,sequence ,@(if test-p `(:test ,test)))))
+       (check result (format nil "No element ~a in sequence ~a." ',item ',sequence))))
+
 (defun %mapcheck (checker list-names &rest lists)
   (let ((fails ())
 	(iteration 0))
