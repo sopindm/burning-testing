@@ -15,7 +15,7 @@
 
 	   #:equality-check
 	   #:define-equality-check
-	   #:define-equality-checs
+	   #:define-equality-checks
 
 	   #:!t #:?t
 	   #:!not #:?not
