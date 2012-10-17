@@ -226,6 +226,35 @@
 	 "Test NO-CONDITION-FAIL-TEST.CHECK-TESTS FAILED."
 	 "0 tests of 1 success."))
 
+(def-testing-test condition-safe-test check-tests
+    !string=-check
+  (?condition-safe (+ 2 2))
+  (?condition-safe (signal 'condition) simple-error)
+  (lines ""
+	 "1 tests of 1 success."))
+
+(def-testing-test condition-safe-fail-test check-tests
+    !lines=
+  (?condition-safe (error "bla"))
+  (?condition-safe (warn "bla bla"))
+  (?condition-safe (warn "a warning") simple-warning)
+  (?condition-safe (error 'error))
+  (lines "(ERROR bla) signaled"
+	 "bla"
+	 ""
+	 "(WARN bla bla) signaled"
+	 "bla bla"
+	 ""
+	 "(WARN a warning) signaled"
+	 "a warning"
+	 ""
+	 "(ERROR 'ERROR) signaled"
+	 "condition of type ERROR"
+	 ""
+	 ""
+	 "Test CONDITION-SAFE-FAIL-TEST.CHECK-TESTS FAILED."
+	 "0 tests of 1 success."))
+
 (def-testing-test lines-equality-test check-tests
     !string=
   (!lines= "abcd" "abcd")

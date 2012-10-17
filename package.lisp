@@ -33,6 +33,7 @@
 	   #:!find #:?find
 
 	   #:!condition #:?condition
+	   #:!condition-safe #:?condition-safe
 	   #:!error #:?error
 
 	   #:lines

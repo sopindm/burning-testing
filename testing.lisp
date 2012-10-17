@@ -202,6 +202,16 @@
 			(simple-condition-format-arguments ,error-sym))
 		 (format nil ,message ,@args)))))
 
+(defun %condition-safe-message (cond)
+  (if (typep cond 'simple-condition)
+      (apply #'format nil (simple-condition-format-control cond) (simple-condition-format-arguments cond))
+      (format nil "condition of type ~a" (type-of cond))))
+
+(defcheck condition-safe (expression &optional (condition 'condition))
+  `(handler-case ,expression
+     (,condition (cond)
+       (check nil "~a signaled~%~a~%" ',expression (%condition-safe-message cond)))))
+
 (eval-everytime
   (defun string-to-lines (string)
     (labels ((stream-to-lines (stream)
